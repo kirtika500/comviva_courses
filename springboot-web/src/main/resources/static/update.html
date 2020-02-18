@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css" />
+</head>
+<body>
+<center><h3>-- Update Products --</h3></center>
+    <div class="container">
+<div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Product Id</span>
+            </div>
+            <input id="title" type="text" class="form-control" placeholder="Product Id" aria-label="Username"
+                aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Cateogry</span>
+            </div>
+            <input id="title" type="text" class="form-control" placeholder="Cateogry" aria-label="Username"
+                aria-describedby="basic-addon1">
+        </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Cateogry Description</span>
+            </div>
+            <input id="summary" type="text" class="form-control" placeholder="Description" aria-label="Username"
+                aria-describedby="basic-addon1">
+        </div>
+   
+        <div class="input-group mb-3">
+        
+          
+            <button id="update" class="btn btn-primary">Update Product</button>
+        </div>
+       <button type="button" onclick="pageRedirect()">Go to home</button>
+    </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script>
+    function pageRedirect()
+    {
+    	window.location.href="http://localhost:8000/addCourse.html"
+    }
+    $("#update").click(()=>{
+		console.log($('#title').val())
+		var course = {title:$('#title').val(), summary:$('#summary').val() }
+		console.log(course);
+		$('#title').val('');
+		$('#summary').val('');
+	
+		 alert('Data Updated');
+		
+		/* $.post("api/courses",
+				  course,
+				  function(data, status){
+				    alert("Data: " + data + "\nStatus: " + status);
+				  }); */
+		$.ajax({
+  		  url: 'api/courses',
+  		  method: 'POST',
+	  		dataType: 'json',
+	        contentType: 'application/json',
+  		  data: JSON.stringify(course)
+  		}).done(function() {
+  		 console.log('dcourse added!!')
+  		 alert('course added!!');
+  		}); 
+	})
+    
+    </script>
+</body>
+</html>
